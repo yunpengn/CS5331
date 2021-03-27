@@ -1,2 +1,7 @@
-# CS5331
-CS5331 Web Security @ NUS SoC
+# CS5331 Web Security
+
+Web Security
+
+## License
+
+[GNU General Public License 3.0](LICENSE)
