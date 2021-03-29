@@ -1,0 +1,1 @@
+document.getElementById('frame1').contentWindow.postMessage(JSON.stringify({content: document.getElementById('text1').value, search_engine: document.getElementById('bing').checked ? 1 : 2}), 'https://nus-cs5331.github.io');

